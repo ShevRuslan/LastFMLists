@@ -6,7 +6,55 @@
         xmlns:local="clr-namespace:LastFMLists"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type local:Track}">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding name}"/>
+                <TextBlock Text=" - "/>
+                <TextBlock Text="{Binding artist}"/>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:Tag}">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding name}"/>
+                <TextBlock Text=" - "/>
+                <TextBlock Text="{Binding count}"/>
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.05*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="0.1*"></RowDefinition>
+            <RowDefinition Height="0.1*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="147*"></ColumnDefinition>
+                <ColumnDefinition Width="419*"></ColumnDefinition>
+                <ColumnDefinition Width="226*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" FontWeight="Bold" Text="Топ чарт из LastFM API - " />
+            <TextBlock Grid.Column="1" FontWeight="Bold" Text="" Name="Typography" />
+            <TextBlock Grid.Column="2" FontWeight="Bold" Text="Кол-во уникальный тегов -" Name="TagsTypography" />
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="0.4*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <ListBox Name="tracksList" Grid.Column="0"></ListBox>
+            <ListBox Name="tagsList" Grid.Column="1"></ListBox>
+        </Grid>
+        <Grid Grid.Row="2">
+            <ProgressBar Name="Progress" Maximum="50"></ProgressBar>
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Name="TrackParse" FontSize="16">
+            </TextBlock>
+        </Grid>
+        <Button Grid.Row="3" Click="addNewTracks">Получить еще</Button>
     </Grid>
 </Window>
